@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container py-5">
+    <section class="card-body">
+        <h1 class="text-center">Bienvenido</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut totam sed eos iste pariatur suscipit natus magnam repellat cumque nobis ipsa amet quasi nihil eligendi, officia impedit soluta veritatis aliquid.</p>
+    </section>
+</main>
+
+<div class="text-center">
+    {% if user.is_authenticated %}
+        <!-- Opciones para usuarios autenticados -->
+        <p>¡Ya estás conectado!</p>
+    {% else %}
+        <!-- Botones para usuarios no autenticados -->
+        <a class="btn btn-primary" href="{% url 'inicio' %}">Iniciar Sesión</a>
+        <a class="btn btn-primary" href="{% url 'signup' %}">Registrarse</a>
+    {% endif %}
+</div>
+
+{% endblock %}

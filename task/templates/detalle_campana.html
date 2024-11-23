@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container"> 
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <h1 class="text-secondary">{{ campana.titulo }}</h1>
+
+            <!-- Mostrar error si existe -->
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            <!-- Formulario de actualización -->
+            <div class="mt-5">
+                <form method="post" action="{% url 'detalle_campana' campana.id %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Actualizar campaña</button>
+                </form>
+            </div>
+
+            <!-- Formulario de eliminación con confirmación en JavaScript -->
+            <div class="mt-3">
+                <form method="post" action="{% url 'campana_eliminada' campana.id %}" onsubmit="confirmDelete(event)">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Eliminar campaña</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% block scripts %}
+<script>
+    // Función de confirmación antes de eliminar
+    function confirmDelete(event) {
+        if (!confirm('¿Estás seguro de que quieres eliminar esta campaña?')) {
+            event.preventDefault();  // Cancelar la eliminación si el usuario no confirma
+        }
+    }
+</script>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2 class="mb-0">Iniciar Sesión</h2>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <!-- Mostrar errores -->
+                        {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+
+                        <!-- Renderiza el formulario automáticamente -->
+                        {{ form.as_p }}
+
+                        <button type="submit" class="btn btn-primary w-100 mt-3">Iniciar Sesión</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center bg-light">
+                    <small>¿No tienes una cuenta? <a href="{% url 'signup' %}" class="text-primary">Regístrate aquí</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
